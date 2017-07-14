@@ -20,7 +20,15 @@ app.use(express.static('public'));
 //     res.send({"success":true});
 //   });
 
-var bw = {};
+
+// {
+//   buzzWord: String,
+//   points: Number
+//   heard: false
+// }
+
+
+var bw = [];
 
 
 app.get('/buzzwords', (req,res) => {
@@ -31,10 +39,17 @@ app.get('/buzzwords', (req,res) => {
 
 app.post('/buzzwords', (req,res) => {
   //console.log(req.body);
-  bw[req.body.buzzWord] = req.body.points;
+  bw.push(req.body);
   console.log('bw is', bw);
   // console.log("got buzzwords POST");
   res.send({"success":true});
+});
+
+app.put('/buzzwords', (req,res) => {
+  console.log("put up or shut up");
+  if (bw.hasOwnProperty(req.body.buzzWord)) {
+    bw[req.body.buzzWord] = req.body
+  }
 });
 
 const server = app.listen(3000, () => {
