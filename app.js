@@ -27,7 +27,6 @@ app.use(express.static('public'));
 //   heard: false
 // }
 
-
 var bw = [];
 
 
@@ -51,11 +50,28 @@ app.put('/buzzwords', (req,res) => {
     if (el.buzzWord === req.body.buzzWord) {
       el.points = req.body.points;
       console.log('bw is now', bw);
-      res.send(`{ "success": true, newScore: ${el.points} }`);
+      res.end(`{ "success": true, newScore: ${el.points} }`);
+    }
+    // else{
+    //   res.send('false');
+    // }
+  });
+  res.end(`{"success": false}`);
+});
+
+app.delete('/buzzwords', (req, res) => {
+  console.log("deleteme");
+  bw.forEach((el) => {
+    if (el.buzzWord === req.body.buzzWord) {
+      var idx = bw.indexOf(req.body.buzzWord);
+      bw.splice(idx, 1);
+      console.log('bw is now', bw);
+      res.end(`{"success": true}`);
     }
   });
-
+  res.end(`{"success" : false}`);
 });
+
 
 const server = app.listen(3000, () => {
   var host = server.address().address;
