@@ -9,38 +9,16 @@ app.use(bp());
 
 app.use(express.static('public'));
 
-// router.route('/buzzwords')
-//   .get((req,res) => {
-//     console.log("buzzwords here");
-//     res.send("buzzwords JSON thing should be sent");
-//     res.end();
-//   })
-//   .post((req,res) => {
-//     console.log("got buzzwords POST");
-//     res.send({"success":true});
-//   });
-
-
-// {
-//   buzzWord: String,
-//   points: Number
-//   heard: false
-// }
-
 var bw = [];
-
 
 app.get('/buzzwords', (req,res) => {
   console.log("buzzwords here");
-  //res.send("buzzwords JSON thing should be sent");
   res.send(bw);
 });
 
 app.post('/buzzwords', (req,res) => {
-  //console.log(req.body);
   bw.push(req.body);
   console.log('bw is', bw);
-  // console.log("got buzzwords POST");
   res.send({"success":true});
 });
 
@@ -52,9 +30,6 @@ app.put('/buzzwords', (req,res) => {
       console.log('bw is now', bw);
       res.end(`{ "success": true, newScore: ${el.points} }`);
     }
-    // else{
-    //   res.send('false');
-    // }
   });
   res.end(`{"success": false}`);
 });
@@ -72,6 +47,13 @@ app.delete('/buzzwords', (req, res) => {
   res.end(`{"success" : false}`);
 });
 
+app.post('/reset', (req, res) => {
+  if (req.body.reset === true) {
+    bw = [];
+    console.log('bw deleted', bw);
+    res.end(`{"success": true}`);
+  }
+});
 
 const server = app.listen(3000, () => {
   var host = server.address().address;
