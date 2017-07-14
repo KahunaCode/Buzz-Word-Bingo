@@ -47,9 +47,14 @@ app.post('/buzzwords', (req,res) => {
 
 app.put('/buzzwords', (req,res) => {
   console.log("put up or shut up");
-  if (bw.hasOwnProperty(req.body.buzzWord)) {
-    bw[req.body.buzzWord] = req.body
-  }
+  bw.forEach((el) => {
+    if (el.buzzWord === req.body.buzzWord) {
+      el.points = req.body.points;
+      console.log('bw is now', bw);
+      res.send(`{ "success": true, newScore: ${el.points} }`);
+    }
+  });
+
 });
 
 const server = app.listen(3000, () => {
