@@ -16,13 +16,13 @@ app.get('/buzzwords', (req,res) => {
   res.send(bw);
 });
 
-app.post('/buzzwords', (req,res) => {
+app.post('/buzzword', (req,res) => {
   bw.push(req.body);
   console.log('bw is', bw);
   res.send({"success":true});
 });
 
-app.put('/buzzwords', (req,res) => {
+app.put('/buzzword', (req,res) => {
   console.log("put up or shut up");
   bw.forEach((el) => {
     if (el.buzzWord === req.body.buzzWord) {
@@ -34,7 +34,7 @@ app.put('/buzzwords', (req,res) => {
   res.end(`{"success": false}`);
 });
 
-app.delete('/buzzwords', (req, res) => {
+app.delete('/buzzword', (req, res) => {
   console.log("deleteme");
   bw.forEach((el) => {
     if (el.buzzWord === req.body.buzzWord) {
