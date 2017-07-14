@@ -25,13 +25,14 @@ var bw = {};
 
 app.get('/buzzwords', (req,res) => {
   console.log("buzzwords here");
-  res.send("buzzwords JSON thing should be sent");
+  //res.send("buzzwords JSON thing should be sent");
+  res.send(bw);
 });
 
 app.post('/buzzwords', (req,res) => {
   //console.log(req.body);
   bw[req.body.buzzWord] = req.body.points;
-  // console.log('bw is', bw);
+  console.log('bw is', bw);
   // console.log("got buzzwords POST");
   res.send({"success":true});
 });
