@@ -5,7 +5,7 @@ const app = express();
 const router = express.Router();
 const bp = require('body-parser');
 
-app.use(bp());
+app.use(bp.json());
 
 app.use(express.static('public'));
 
